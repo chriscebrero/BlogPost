@@ -20,12 +20,6 @@ var blogSchema = new mongoose.Schema({
 
 var Blog = mongoose.model("Blog", blogSchema);
 
-Blog.create({
-    title: "TestBlog",
-    image: "https://upload.wikimedia.org/wikipedia/en/thumb/6/63/Feels_good_man.jpg/200px-Feels_good_man.jpg",
-    body: "Hello this is a blogpost"
-})
-
 //RESTFUL Routes
 
 app.get("/blogs", function(req, res){
