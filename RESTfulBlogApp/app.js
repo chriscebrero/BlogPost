@@ -22,9 +22,19 @@ var Blog = mongoose.model("Blog", blogSchema);
 
 //RESTFUL Routes
 
-app.get("/blogs", function(req, res){
-    res.render("index");
+app.get("/", function(req, res){
+    res.redirect("/blogs");
 })
+
+app.get("/blogs", function(req, res){
+    Blog.find({}, function(err, blogs){
+        if(err){
+            console.log("ERROR!");
+        } else {
+            res.render("index", {blogs: blogs});
+        }
+    });
+});
 
 app.listen(process.env.PORT, process.env.IP, function() {
     console.log("Server is running!");
