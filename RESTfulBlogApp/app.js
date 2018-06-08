@@ -56,6 +56,12 @@ app.post("/blogs", function(req, res){
     });
 });
 
+// SHOW Route
+
+app.get("/blogs/:id", function(req, res){
+    res.send("SHOW PAGE");
+})
+
 app.listen(process.env.PORT, process.env.IP, function() {
     console.log("Server is running!");
 });
