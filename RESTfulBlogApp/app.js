@@ -9,6 +9,7 @@ mongoose.connect("mongodb://localhost/restful_blog_app");
 app.set("view engine", "ejs");
 app.use(express.static("public"));
 app.use(bodyParser.urlencoded({extended: true}));
+app.use(methodOverride("_method"));
 
 
 //MONGOOSE CONFIG
@@ -83,7 +84,18 @@ app.get("/blogs/:id/edit", function(req, res){
 
 //UPDATE Route
 app.put("/blogs/:id", function(req, res){
-    res.send("UPDATE ROUTE!");
+    Blog.findByIdAndUpdate(req.params.id, req.body.blog, function(err, updatedBlog){
+        if(err){
+            res.redirect("/blogs");
+        } else {
+            res.redirect("/blogs/" + req.params.id);
+        }
+    })
+});
+
+//DELETE Route
+app.delete("/blogs/:id", function(req, res) {
+    res.send("DELETE ROUTE");
 })
 
 app.listen(process.env.PORT, process.env.IP, function() {
